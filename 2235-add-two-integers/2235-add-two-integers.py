@@ -14,7 +14,7 @@ class Solution:
             
             b= (carry << 1) & mask
         
-        if a>>8 & 1 == 1:
+        if (a>>8 & 1) == 1:
             # result is negative
             return -self.sum(~a, 1)
         return a
