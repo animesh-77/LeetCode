@@ -8,12 +8,12 @@ class Solution:
         
         while (n>0):
             
-            new_num = n>>1
+            # new_num = n>>1
             # print("new num", new_num,"   n", n)
-            if new_num *2 != n and new_num != 0:
+            if (n>>1) *2 != n and (n>>1) != 0:
                 return False
             
-            n= new_num
+            n= n>>1
         return True
             
         
