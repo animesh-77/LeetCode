@@ -51,20 +51,20 @@ class Solution:
                         # print("ROW fail", i, num)
                         return False
                     else:
-                        row_check[i][num]= 1
+                        row_check[i][num]= None
                     
                     if num in col_check[j]:
                         # print("COL fail", j)
                         return False
                     else:
-                        col_check[j][num] = 1
+                        col_check[j][num] = None
                         
                     block= self.get_block(i, j)
                     if num in block_check[block]:
                         # print("BLOCK fail", block)
                         return False
                     else:
-                        block_check[block][num] = 1
+                        block_check[block][num] = None
         
         return True 
         
