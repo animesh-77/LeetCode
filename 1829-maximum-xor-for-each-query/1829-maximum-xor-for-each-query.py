@@ -14,7 +14,7 @@ class Solution:
         
         for num in nums[1:]:
             
-            A = A ^ num
+            A = A ^ (num&full_num)
             k = (A^full_num) & full_num
             ret.append(k)
             # print(A, ret[-1])
