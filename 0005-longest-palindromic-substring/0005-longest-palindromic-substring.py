@@ -4,35 +4,34 @@ class Solution:
         
     def longestPalindrome(self, s: str) -> str:
         
-        is_pal = [[False] * len(s) for _ in range(len(s))]
+        max_pal_str= ""
         
-        max_pal_str= s[0]
-        
-        for row in range(len(s)):
-            is_pal[row][row]= True
+        for pos in range(len(s)):
             
-            if row < len(s)-1:
-                    
-                    if s[row]==s[row+1]:
-                        is_pal[row][row+1]= True
-                    
-                        new_pal = s[row:row+2]
-                        if len(new_pal) > len(max_pal_str):
-                            max_pal_str= new_pal
+            # odd length palindromes
+            for offset in range(1,len(s)):
+                left, right= pos-offset, pos+offset
+                if left >= 0 and right < len(s):
+                    if s[left]== s[right]:
+                        new_pal = s[left:right+1]
+                        if len(max_pal_str) < len(new_pal):
+                            max_pal_str = new_pal
+                    else:
+                        break
+                        
+            # even length palindromes
+            centre= pos+0.5
+            for offset in range(0,len(s)):
+                left, right= int(pos-offset-0.5), int(pos+offset+0.5)
+                if left >= 0 and right < len(s):
+                    if s[left]== s[right]:
+                        new_pal = s[left:right+1]
+                        if len(max_pal_str) < len(new_pal):
+                            max_pal_str = new_pal
+                            
+                    else:
+                        break
             
-        
-        for row in range(len(s)-3,-1,-1):
-            for col in range(row+2, len(s)):
-                if s[row] == s[col] and is_pal[row+1][col-1] is True:
-                    is_pal[row][col] = True
-                    
-                    new_pal= s[row:col+1]
-                    if len(new_pal) > len(max_pal_str):
-                        max_pal_str= new_pal
-                    
-                    
-        # for row in range(len(s)):
-        #     print(is_pal[row])
-        
-        return max_pal_str   
+        return max_pal_str
+                        
         
