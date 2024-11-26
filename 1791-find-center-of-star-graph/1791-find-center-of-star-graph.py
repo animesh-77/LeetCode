@@ -1,19 +1,13 @@
 class Solution:
     def findCenter(self, edges: List[List[int]]) -> int:
         
-        n= len(edges)+ 1
+        u0, v0= edges[0][0], edges[0][1]
+        u1, v1= edges[1][0], edges[1][1]
         
-        edge= [0]*(n+1)
+        if u0 == u1 or u0== v1:
+            return u0
+        if v0 == u1 or v0 == v1:
+            return v0
         
         
-        for p1, t1 in edges:
-            
-            edge[t1] += 1
-            edge[p1] += 1
-            
-        for i in range(1, n+1):
-            if edge[i] == n-1 :
-                return i
-        else:
-            return -1
         
