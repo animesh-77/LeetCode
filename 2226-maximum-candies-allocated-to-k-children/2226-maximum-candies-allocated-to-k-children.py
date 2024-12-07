@@ -16,20 +16,22 @@ class Solution:
                 
             return not(totalPiles >= k)        
         
-        totalCandies= sum(candies)
+        def sumMaxMin():
+            totalCandies= 0
+            minCandies, maxCandies= 1, candies[0]
+            
+            for candy in candies:
+                totalCandies += candy
+                maxCandies = max(maxCandies, candy)
+                
+            return minCandies, maxCandies, totalCandies
+        
+        minCandies, maxCandies, totalCandies= sumMaxMin()
         
         if totalCandies < k:
             return 0
         
-        
-        minCandies, maxCandies= 1, max(candies)
-        
-        # for optCandy in range(minCandies, maxCandies+1):
-        #     print(countPiles(optCandy))
-        
-        # print("####")
         optCandy= bisect.bisect_right(range(minCandies, maxCandies+1), False, key= countPiles)
-        # print(optCandy)
 
         return optCandy
         
