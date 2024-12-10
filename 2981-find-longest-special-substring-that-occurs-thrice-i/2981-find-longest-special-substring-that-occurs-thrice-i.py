@@ -11,25 +11,45 @@ class Solution:
         
         lenS= len(s)
         
-        for subStrLen in range(lenS-2, 0, -1):
+        specialCandidates= set()
+        
+        special= s[0]
+        for c in s[1:]:
+            if c== special[-1]:
+                special += c
+            else:
+                specialCandidates.add(special)
+                special = c
+        else:
+            specialCandidates.add(special)
             
-            # every substring will have lenght subStrLen
-            subStrDict= {}
+            
+        newSpecialCandidates= set()
+        
+        for specialCandidate in specialCandidates:
+            newSpecialCandidate = specialCandidate
+            while len(newSpecialCandidate) >0 :
+                newSpecialCandidates.add(newSpecialCandidate)
+                
+                newSpecialCandidate= newSpecialCandidate[1:]
+                
+        specialCandidates= list(newSpecialCandidates)
+        specialCandidates.sort(key= lambda x: len(x))
+        
+        for specialCandidate in specialCandidates[::-1]:
+            
+            lenToRet= len(specialCandidate)
+            counter= 0
+            
             for pos in range(0, lenS):
-                
-                subStr= s[pos: pos+subStrLen]
-                if len(subStr) != subStrLen:
+                subStr= s[pos: pos+lenToRet]
+                if len(subStr) != lenToRet:
                     break
-                
-                if checkSpecial(subStr) is False:
-                    continue
                     
-                # print(f"{subStrLen=} {subStr=}")
-                
-                subStrDict[subStr] = subStrDict.get(subStr, 0)+1
-                
-                if subStrDict[subStr] == 3:
-                    # print(f"{subStrLen=} {subStr=}")
-                    return subStrLen
-                
-        return -1
+                if subStr == specialCandidate:
+                    counter += 1
+                    
+                if counter == 3:
+                    return lenToRet
+        else:
+            return -1
